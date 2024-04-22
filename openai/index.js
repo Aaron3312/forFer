@@ -4,7 +4,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const app = express();
-const port = 3000;
+const port = 3005;
 const fs = require("fs/promises"); // Import fs/promises para manejar archivos de forma asíncrona
 
 app.use(cors());
@@ -33,7 +33,7 @@ app.post("/api/CustomGreeting", async (req, res) => {
 	res.json(response1);
 });
 
-app.listen(port, () => {
+app.listen(port, '0.0.0.0', () => {
 	console.log(`Server running on http://localhost:${port}`);
 });
 
