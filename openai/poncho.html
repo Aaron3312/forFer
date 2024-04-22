@@ -21,7 +21,7 @@
 				event.preventDefault(); // Previene el envío tradicional del formulario
 				const name = document.getElementById("name").value;
 				const response = await fetch(
-					"http://localhost:3000/api/CustomGreeting",
+					"http://34.16.150.55:3005/api/CustomGreeting",
 					{
 						method: "POST",
 						headers: {
@@ -35,7 +35,7 @@
 				displayGreeting();
 				// No limpiar o alterar 'responseArea' después de establecer el texto
 			};
-            
+
 			function displayGreeting() {
 				const lastGreeting = localStorage.getItem("lastGreeting");
 				if (lastGreeting) {
