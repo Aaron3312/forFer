@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Asistente Taquero Pro</title>
+	</head>
+	<body>
+		<h1>Pregunta lo que gustes sobre taqueros o tacos</h1>
+		<form id="greetingForm">
+			<label for="name">Ingresa tu pregunta:</label>
+			<input type="text" id="name" name="name" required />
+			<button type="submit">Enviar</button>
+		</form>
+		<div id="responseArea">Esperando respuesta...</div>
+		<div id="Response"></div>
+
+		<script>
+			document.getElementById("greetingForm").onsubmit = async function (
+				event
+			) {
+				event.preventDefault(); // Previene el envío tradicional del formulario
+				const name = document.getElementById("name").value;
+				const response = await fetch(
+					"http://localhost:3000/api/CustomGreeting",
+					{
+						method: "POST",
+						headers: {
+							"Content-Type": "application/json",
+						},
+						body: JSON.stringify({ name: name }),
+					}
+				);
+				const data = await response.json();
+				localStorage.setItem("lastGreeting", `Saludo: ${data.message.content}`); // Guardar en localStorage
+				displayGreeting();
+				// No limpiar o alterar 'responseArea' después de establecer el texto
+			};
+            
+			function displayGreeting() {
+				const lastGreeting = localStorage.getItem("lastGreeting");
+				if (lastGreeting) {
+					document.getElementById("responseArea").textContent = lastGreeting;
+				}
+			}
+
+			// Llamar a displayGreeting al cargar la página para mostrar el último saludo guardado
+			window.onload = function () {
+				displayGreeting();
+			};
+		</script>
+	</body>
+</html>
