@@ -21,7 +21,7 @@
 				event.preventDefault(); // Previene el envío tradicional del formulario
 				const name = document.getElementById("name").value;
 				const response = await fetch(
-					"http://34.16.150.55:80/api/CustomGreeting",
+					"http://34.16.150.55:443/api/CustomGreeting",
 					{
 						method: "POST",
 						headers: {
